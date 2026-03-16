@@ -10,7 +10,7 @@ function AdminOrder() {
 
   const fetchOrders = async () => {
     try {
-      const res = await axios.get("${API_URL}/api/orders");
+      const res = await axios.get(`${API_URL}/api/orders`);
       setOrders(res.data);
     } catch (error) {
       console.error(error);

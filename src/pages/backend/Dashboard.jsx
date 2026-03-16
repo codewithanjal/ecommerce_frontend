@@ -24,7 +24,7 @@ function Dashboard() {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get("${API_URL}/api/products");
+      const res = await axios.get(`${API_URL}/api/products`);
       setProducts(res.data);
     } catch (error) {
       console.log(error);
@@ -33,7 +33,7 @@ function Dashboard() {
 
   const fetchOrders = async () => {
     try {
-      const res = await axios.get("${API_URL}/api/orders");
+      const res = await axios.get(`${API_URL}/api/orders`);
       setOrders(res.data);
     } catch (error) {
       console.log(error);
@@ -42,7 +42,7 @@ function Dashboard() {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get("${API_URL}/api/users");
+      const res = await axios.get(`${API_URL}/api/users`);
       setUsers(res.data);
     } catch (error) {
       console.log("Users API not found (optional)");

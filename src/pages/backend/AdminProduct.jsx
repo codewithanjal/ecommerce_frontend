@@ -15,7 +15,7 @@ function AdminProduct() {
   /* ================= GET DATA ================= */
   const getCategories = async () => {
     try {
-      const res = await axios.get("${API_URL}/api/categories");
+      const res = await axios.get(`${API_URL}/api/categories`);
       setCategories(res.data);
     } catch (err) {
       console.error(err);
@@ -24,7 +24,7 @@ function AdminProduct() {
 
   const getProducts = async () => {
     try {
-      const res = await axios.get("${API_URL}/api/products");
+      const res = await axios.get(`${API_URL}/api/products`);
       setProducts(res.data);
     } catch (err) {
       console.error(err);
@@ -59,7 +59,7 @@ function AdminProduct() {
         setEditId(null);
       } else {
         await axios.post(
-          "${API_URL}/api/products",
+          `${API_URL}/api/products`,
           formData,
           { headers: { "Content-Type": "multipart/form-data" } }
         );

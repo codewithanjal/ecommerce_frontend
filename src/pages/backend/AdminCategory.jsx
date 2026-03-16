@@ -12,7 +12,7 @@ function AdminCategory() {
 
   const getAllCategories = async () => {
     try {
-      const res = await axios.get("${API_URL}/api/categories");
+      const res = await axios.get(`${API_URL}/api/categories`);
       setData(res.data);
     } catch (err) {
       console.error(err);
@@ -28,7 +28,7 @@ function AdminCategory() {
         );
         setEditId(null);
       } else {
-        await axios.post("${API_URL}/api/categories", formData);
+        await axios.post(`${API_URL}/api/categories`, formData);
       }
       reset();
       getAllCategories();
