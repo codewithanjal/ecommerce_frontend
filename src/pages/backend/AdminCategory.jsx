@@ -2,15 +2,17 @@ import React, { useEffect, useState } from "react";
 import Backend from "../../layout/Backend";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import API_URL from "../../api/config";
 
 function AdminCategory() {
+
   const { register, handleSubmit, reset } = useForm();
   const [data, setData] = useState([]);
   const [editId, setEditId] = useState(null);
 
   const getAllCategories = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/categories");
+      const res = await axios.get("${API_URL}/api/categories");
       setData(res.data);
     } catch (err) {
       console.error(err);
@@ -21,12 +23,12 @@ function AdminCategory() {
     try {
       if (editId) {
         await axios.put(
-          `http://localhost:5000/api/categories/${editId}`,
+          `${API_URL}/api/categories/${editId}`,
           formData
         );
         setEditId(null);
       } else {
-        await axios.post("http://localhost:5000/api/categories", formData);
+        await axios.post("${API_URL}/api/categories", formData);
       }
       reset();
       getAllCategories();
@@ -40,7 +42,7 @@ function AdminCategory() {
   }, []);
 
   const deleteId = async (id) => {
-    await axios.delete(`http://localhost:5000/api/categories/${id}`);
+    await axios.delete(`${API_URL}/api/categories/${id}`);
     getAllCategories();
   };
 

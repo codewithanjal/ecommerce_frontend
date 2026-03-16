@@ -5,6 +5,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Frontend from "../../layout/Frontend";
 import { FaSearch } from "react-icons/fa";
+import API_URL from "../../api/config";
 
 function Home() {
   const { state, dispatch } = useContext(CartContext);
@@ -25,12 +26,13 @@ function Home() {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/products");
+      const res = await axios.get(`${API_URL}/api/products`);
       setProducts(res.data);
     } catch (err) {
       console.log("Error fetching products:", err);
     }
   };
+
 
   const handleAddToCart = (product) => {
     if (!user) {
@@ -93,7 +95,7 @@ function Home() {
                   <img
                     src={
                       product.image
-                        ? `http://localhost:5000/uploads/${product.image}`
+                        ? `${API_URL}/uploads/${product.image}`
                         : "https://via.placeholder.com/150"
                     }
                     alt={product.title}

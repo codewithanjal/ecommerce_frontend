@@ -3,8 +3,10 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Frontend from "../../layout/Frontend";
 import { CartContext } from "./CartContext";
+import API_URL from "../../api/config";
 
 function Category() {
+
   const { cid } = useParams(); // category ID from URL
   const { dispatch } = useContext(CartContext);
 
@@ -14,13 +16,13 @@ function Category() {
   useEffect(() => {
     // Fetch products by category ID
     axios
-      .get(`http://localhost:5000/api/products/category/${cid}`)
+      .get(`${API_URL}/api/products/category/${cid}`)
       .then(res => setProducts(res.data))
       .catch(err => console.log(err));
 
     // Fetch category name by ID
     axios
-      .get(`http://localhost:5000/api/categories/${cid}`)
+      .get(`${API_URL}/api/categories/${cid}`)
       .then(res => setCategoryName(res.data.name))
       .catch(err => console.log(err));
   }, [cid]);
@@ -35,7 +37,7 @@ function Category() {
             {products.map(product => (
               <div key={product._id} className="bg-white rounded shadow-sm">
                 <img
-                  src={product.image ? `http://localhost:5000/uploads/${product.image}` : "https://via.placeholder.com/150"}
+                  src={product.image ? `${API_URL}/uploads/${product.image}` : "https://via.placeholder.com/150"}
                   alt={product.title}
                   className="w-full h-48 object-cover"
                 />

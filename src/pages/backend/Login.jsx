@@ -2,15 +2,17 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import API_URL from "../../api/config";
 
 function Login() {
+
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
 
   const onSubmit = async (data) => {
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "${API_URL}/api/auth/login",
         data
       );
 

@@ -3,8 +3,10 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import Frontend from "../../layout/Frontend";
 import { UserContext } from "./UserContext";
+import API_URL from "../../api/config";
 
 function Login() {
+
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -16,7 +18,7 @@ function Login() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "${API_URL}/api/auth/login",
         { email, password }
       );
 

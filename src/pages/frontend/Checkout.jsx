@@ -6,8 +6,10 @@ import { CartContext } from "./CartContext.jsx";
 import { UserContext } from "./UserContext.jsx";
 import axios from "axios";
 import Frontend from "../../layout/Frontend.jsx";
+import API_URL from "../../api/config";
 
 function Checkout() {
+
   const { state, dispatch } = useContext(CartContext);
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
@@ -33,7 +35,7 @@ function Checkout() {
     const orderData = { customer: data, items: state.cart, totalAmount: total };
 
     try {
-      await axios.post("http://localhost:5000/api/orders", orderData);
+      await axios.post(`${API_URL}/api/orders`, orderData);
       alert("Order placed successfully!");
       dispatch({ type: "clearCart" });
       navigate("/");

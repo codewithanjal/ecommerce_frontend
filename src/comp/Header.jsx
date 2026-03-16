@@ -4,8 +4,10 @@ import { UserContext } from "../pages/frontend/UserContext.jsx";
 import { CartContext } from "../pages/frontend/CartContext.jsx";
 import { Link, useNavigate } from "react-router-dom";
 import { FaSignOutAlt, FaSignInAlt, FaShoppingCart } from "react-icons/fa";
+import API_URL from "../api/config";
 
 function Header() {
+
   const { user, setUser } = useContext(UserContext);
   const { state } = useContext(CartContext);
   const [categories, setCategories] = useState([]);
@@ -13,7 +15,7 @@ function Header() {
 
   // Fetch categories
   useEffect(() => {
-    fetch("http://localhost:5000/api/categories")
+    fetch(`${API_URL}/api/categories`)
       .then((res) => res.json())
       .then((data) => setCategories(data))
       .catch((err) => console.log(err));

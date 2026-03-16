@@ -3,8 +3,10 @@ import { CartContext } from "./CartContext";
 import { Link } from "react-router-dom";
 import Header from "../../comp/Header";
 import { FaTrash } from "react-icons/fa";
+import API_URL from "../../api/config";
 
 function Cart() {
+
   const { state, dispatch } = useContext(CartContext);
 
   const subtotal = state.cart.reduce(
@@ -50,7 +52,7 @@ function Cart() {
                   {/* Item Info */}
                   <div className="flex items-center gap-4">
                     <img
-                      src={`http://localhost:5000/uploads/${item.image}`}
+                      src={`${API_URL}/uploads/${item.image}`}
                       alt={item.name}
                       className="w-20 h-20 object-cover rounded-lg shadow"
                     />

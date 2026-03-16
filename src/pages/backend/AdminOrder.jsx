@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Backend from "../../layout/Backend";
+import API_URL from "../../api/config";
 
 function AdminOrder() {
+
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchOrders = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/orders");
+      const res = await axios.get("${API_URL}/api/orders");
       setOrders(res.data);
     } catch (error) {
       console.error(error);

@@ -5,8 +5,10 @@ import Frontend from "../../layout/Frontend";
 import { CartContext } from "./CartContext";
 import { UserContext } from "./UserContext";
 import { ChevronRight, Star, Truck, ShieldCheck, MessageCircle } from "lucide-react";
+import API_URL from "../../api/config";
 
 function ProductDetail() {
+
   const { id } = useParams();
   const { dispatch } = useContext(CartContext);
   const { user } = useContext(UserContext);
@@ -19,7 +21,7 @@ function ProductDetail() {
   useEffect(() => {
     if (!id) return;
     axios
-      .get(`http://localhost:5000/api/products/${id}`)
+      .get(`${API_URL}/api/products/${id}`)
       .then((res) => {
         setProduct(res.data);
         setLoading(false);
@@ -71,7 +73,7 @@ function ProductDetail() {
                 <div className="w-full md:w-1/3">
                   <div className="aspect-square w-full rounded-md overflow-hidden border">
                     <img
-                      src={product.image ? `http://localhost:5000/uploads/${product.image}` : "https://via.placeholder.com/400"}
+                      src={product.image ? `${API_URL}/uploads/${product.image}` : "https://via.placeholder.com/400"}
                       alt={product.title}
                       className="w-full h-full object-contain"
                     />

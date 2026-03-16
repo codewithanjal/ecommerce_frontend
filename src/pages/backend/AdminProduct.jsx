@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import Backend from "../../layout/Backend";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import API_URL from "../../api/config";
 
 function AdminProduct() {
+
   const { register, handleSubmit, reset, watch } = useForm();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -13,7 +15,7 @@ function AdminProduct() {
   /* ================= GET DATA ================= */
   const getCategories = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/categories");
+      const res = await axios.get("${API_URL}/api/categories");
       setCategories(res.data);
     } catch (err) {
       console.error(err);
@@ -22,7 +24,7 @@ function AdminProduct() {
 
   const getProducts = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/products");
+      const res = await axios.get("${API_URL}/api/products");
       setProducts(res.data);
     } catch (err) {
       console.error(err);
@@ -50,14 +52,14 @@ function AdminProduct() {
 
       if (editId) {
         await axios.put(
-          `http://localhost:5000/api/products/${editId}`,
+          `${API_URL}/api/products/${editId}`,
           formData,
           { headers: { "Content-Type": "multipart/form-data" } }
         );
         setEditId(null);
       } else {
         await axios.post(
-          "http://localhost:5000/api/products",
+          "${API_URL}/api/products",
           formData,
           { headers: { "Content-Type": "multipart/form-data" } }
         );
@@ -74,7 +76,7 @@ function AdminProduct() {
   /* ================= DELETE PRODUCT ================= */
   const deleteProduct = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/products/${id}`);
+      await axios.delete(`${API_URL}/api/products/${id}`);
       getProducts();
     } catch (err) {
       console.error(err);
@@ -95,7 +97,7 @@ function AdminProduct() {
 
     setPreviewImage(
       product.image
-        ? `http://localhost:5000/uploads/${product.image}`
+        ? `${API_URL}/uploads/${product.image}`
         : null
     );
   };
@@ -240,7 +242,7 @@ function AdminProduct() {
                       <td className="px-3 py-3">
                         {p.image ? (
                           <img
-                            src={`http://localhost:5000/uploads/${p.image}`}
+                            src={`${API_URL}/uploads/${p.image}`}
                             alt={p.title}
                             className="w-16 h-16 object-cover rounded-lg"
                           />
